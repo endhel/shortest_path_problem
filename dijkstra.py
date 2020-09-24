@@ -15,6 +15,8 @@ def dijkstra(g, origin):
             if distance[i] < minimum:
                 minimum = distance[i]
                 u = i
+        if u == -1:
+            break
         adjacency = g[u]
         vertices.remove(u)
         index = 0
@@ -35,4 +37,4 @@ graph = [[(1, 2, 3), (3, 1, 1)],
          [(0,), (1,)],
          [(0, 2, 3), (4, 5, 2)]]
 
-dijkstra(graph, 2)
+dijkstra(graph, 4)
