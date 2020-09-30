@@ -1,6 +1,31 @@
 from random import randint, choice
 
 
+def create_non_oriented_graph(num_vertices, num_edges, min_weight, max_weight):
+    graph = []
+    population = []
+
+    for i in range(num_vertices):
+        graph.append([[], []])
+        population.append(i)
+    for j in range(num_edges):
+        while True:
+            v1 = choice(population)
+            while True:
+                v2 = choice(population)
+                if v2 != v1:
+                    break
+            weight = randint(min_weight, max_weight)
+            if v2 not in graph[v1][0]:
+                graph[v1][0].append(v2)
+                graph[v1][1].append(weight)
+                graph[v2][0].append(v1)
+                graph[v2][1].append(weight)
+                break
+
+    return graph
+
+
 def create_graph(num_vertices, num_edges, min_weight, max_weight):
     graph = []
 
