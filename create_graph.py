@@ -4,24 +4,24 @@ from random import randint, choice
 def create_non_oriented_graph(num_vertices, num_edges, min_weight, max_weight):
     graph = []
     population = []
+    edges = num_edges
 
     for i in range(num_vertices):
         graph.append([[], []])
         population.append(i)
-    for j in range(num_edges):
-        while True:
-            v1 = choice(population)
-            while True:
-                v2 = choice(population)
-                if v2 != v1:
-                    break
+    while edges > 0:
+        v1 = choice(population)
+        v2 = choice(population)
+
+        if v2 != v1 and v2 not in graph[v1][0]:
             weight = randint(min_weight, max_weight)
-            if v2 not in graph[v1][0]:
-                graph[v1][0].append(v2)
-                graph[v1][1].append(weight)
-                graph[v2][0].append(v1)
-                graph[v2][1].append(weight)
-                break
+            graph[v1][0].append(v2)
+            graph[v1][1].append(weight)
+            graph[v2][0].append(v1)
+            graph[v2][1].append(weight)
+            edges -= 1
+        else:
+            continue
 
     return graph
 
